@@ -6,8 +6,8 @@ import { AccountsService } from '../accounts.service';
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
-  providers: [LoggingService, AccountsService] //providing our services
-})
+  // providers: [LoggingService] //providing our services
+})                           //удалили AccountService из providers (AccountsService в родительском app.component)
 export class AccountComponent {
   @Input() account: {name: string, status: string};
   @Input() id: number;
@@ -17,6 +17,7 @@ export class AccountComponent {
   
   onSetTo(status: string) {
     this.accountsService.updateStatus(this.id, status);
-    console.log('A server status changed, new status: ' + status);
+    // this.loggingService.logStatusCgange(status);
+    this.accountsService.statusUpdated.emit(status);
   }
 }
