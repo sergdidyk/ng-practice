@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col-8">
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              id="email" 
+              aria-describedby="emailHelp" 
+              placeholder="Enter email"
+              ngModel
+              name="email"
+              required
+              email
+              #email="ngModel">
+              <small *ngIf="!email.valid && email.touched">PLease, enter a valid email!</small>
+          </div>
+
+          <div class="form-group">
+            <label for="select">Subscriptions</label>
+            <select 
+              class="form-control" 
+              id="select"
+              [ngModel]="defaultSubscription"
+              name="subscription">
+              <option>Basic</option>
+              <option>Advanced</option>
+              <option>Pro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              class="form-control" 
+              id="password" 
+              placeholder="Password"
+              ngModel
+              name="password"
+              required
+              #password="ngModel">
+              <small *ngIf="!password.valid && password.touched">Password should not be empty!</small>
+          </div>
+
+          <p class="help_block" *ngIf="!f.valid && f.touched">Form is invalid!</p>
+
+          <button   
+            type="submit" 
+            class="btn btn-primary"
+            [disabled]="!f.valid">Submit</button>
+      </form>
+      <hr>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center" *ngIf="submitted">
+    <div class="col-8">
+        <h3>Your login data:</h3>
+        <p>Email address: {{ userData.email }}</p>
+        <p>Subscription: {{ userData.subscription }}</p>
+        <p>Password: {{ userData.password }}</p>
+    </div>
+  </div>
+</div>
