@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row d-flex justify-content-center mt-3">
+    <div class="col-8">
+
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="projectName" 
+            placeholder="Example input"
+            formControlName="projectName">
+            <span *ngIf="!projectForm.get('projectName').valid && projectForm.get('projectName').touched">
+              <small
+                *ngIf="projectForm.get('projectName').errors['nameIsForbidden']">This project name is forbidden!
+              </small>
+              <small
+                *ngIf="projectForm.get('projectName').errors['required']">Project name should not be empty!
+              </small>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            id="email" 
+            aria-describedby="emailHelp" 
+            placeholder="Enter email"
+            formControlName="email">
+            <span>
+              <small
+                *ngIf="!projectForm.get('email').valid && projectForm.get('email').touched">Your email is invalid!
+              </small>
+            </span>
+        </div>
+
+        <div class="form-group">
+          <label for="projectStatus">Project Status</label>
+          <select 
+            class="form-control" 
+            id="projectStatus"
+            formControlName="projectStatus">
+            <option *ngFor="let status of projectStatuses">{{ status }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
